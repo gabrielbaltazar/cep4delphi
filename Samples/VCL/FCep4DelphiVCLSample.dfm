@@ -23,9 +23,9 @@ object Form1: TForm1
     object Label1: TLabel
       Left = 16
       Top = 16
-      Width = 63
+      Width = 48
       Height = 15
-      Caption = 'Postal Code'
+      Caption = 'Zip Code'
     end
     object Label2: TLabel
       Left = 16
@@ -90,7 +90,7 @@ object Form1: TForm1
       Height = 15
       Caption = 'Longitude'
     end
-    object edtPostalCode: TEdit
+    object edtZipCode: TEdit
       Left = 16
       Top = 34
       Width = 137

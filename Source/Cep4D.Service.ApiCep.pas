@@ -14,11 +14,11 @@ type TCep4DServiceApiCep = class(TInterfacedObject, ICep4DService)
 
   private
     FAddress: ICep4DModelAddress;
-    FPostalCode: String;
+    FZipCode: String;
     FComponent: ICep4DComponentRequest;
 
   protected
-    function PostalCode(AValue: String): ICep4DService;
+    function ZipCode(AValue: String): ICep4DService;
     function Search: ICep4DModelAddress;
 
     function Address: ICep4DModelAddress;
@@ -51,10 +51,10 @@ begin
   result := Self.Create;
 end;
 
-function TCep4DServiceApiCep.PostalCode(AValue: String): ICep4DService;
+function TCep4DServiceApiCep.ZipCode(AValue: String): ICep4DService;
 begin
   result := Self;
-  FPostalCode := AValue;
+  FZipCode := AValue;
 end;
 
 function TCep4DServiceApiCep.Search: ICep4DModelAddress;
@@ -65,8 +65,8 @@ var
   LJSON: TJSONObject;
 begin
   FAddress := NewAddress;
-  FAddress.PostalCode(FPostalCode);
-  LUrl := Format('https://ws.apicep.com/cep/%s.json', [FAddress.PostalCode]);
+  FAddress.ZipCode(FZipCode);
+  LUrl := Format('https://ws.apicep.com/cep/%s.json', [FAddress.ZipCode]);
 
   FComponent
     .BaseUrl(LUrl)

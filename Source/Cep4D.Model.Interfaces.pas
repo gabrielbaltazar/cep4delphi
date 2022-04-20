@@ -5,8 +5,8 @@ interface
 type
   ICep4DModelAddress = interface
     ['{21B18D61-5F4F-442C-9C01-2CC3275F0C2B}']
-    function PostalCode: String; overload;
-    function PostalCode(AValue: String): ICep4DModelAddress; overload;
+    function ZipCode: String; overload;
+    function ZipCode(AValue: String): ICep4DModelAddress; overload;
 
     function Address: String; overload;
     function Address(AValue: String): ICep4DModelAddress; overload;

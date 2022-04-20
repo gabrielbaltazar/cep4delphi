@@ -10,7 +10,7 @@ type
   TForm1 = class(TForm)
     pnlTop: TPanel;
     Label1: TLabel;
-    edtPostalCode: TEdit;
+    edtZipCode: TEdit;
     btnSearch: TButton;
     Label2: TLabel;
     edtAddressType: TEdit;
@@ -52,7 +52,7 @@ var
   LAddress: ICep4DModelAddress;
 begin
   LAddress := GetCep4D
-                .PostalCode(edtPostalCode.Text)
+                .ZipCode(edtZipCode.Text)
                 .Search;
 
   edtAddressType.Text := LAddress.AddressType;

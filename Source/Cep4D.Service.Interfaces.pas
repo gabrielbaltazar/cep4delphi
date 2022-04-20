@@ -9,7 +9,7 @@ uses
 type
   ICep4DService = interface
     ['{A3043859-B1F7-40DB-A6A6-136DAFEF5474}']
-    function PostalCode(AValue: String): ICep4DService;
+    function ZipCode(AValue: String): ICep4DService;
     function Search: ICep4DModelAddress;
 
     function Address: ICep4DModelAddress;

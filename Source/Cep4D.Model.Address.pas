@@ -9,7 +9,7 @@ uses
 type TCep4DModelAddress = class(TInterfacedObject, ICep4DModelAddress)
 
   private
-    FPostalCode: String;
+    FZipCode: String;
     FAddress: String;
     FAddressType: string;
     FComplement: string;
@@ -22,8 +22,8 @@ type TCep4DModelAddress = class(TInterfacedObject, ICep4DModelAddress)
     FLongitude: Double;
 
   protected
-    function PostalCode: String; overload;
-    function PostalCode(AValue: String): ICep4DModelAddress; overload;
+    function ZipCode: String; overload;
+    function ZipCode(AValue: String): ICep4DModelAddress; overload;
 
     function Address: String; overload;
     function Address(AValue: String): ICep4DModelAddress; overload;
@@ -145,21 +145,21 @@ begin
   result := Self.Create;
 end;
 
-function TCep4DModelAddress.PostalCode: String;
+function TCep4DModelAddress.ZipCode: String;
 begin
-  result := FPostalCode;
+  result := FZipCode;
 end;
 
-function TCep4DModelAddress.PostalCode(AValue: String): ICep4DModelAddress;
+function TCep4DModelAddress.ZipCode(AValue: String): ICep4DModelAddress;
 var
   I: Integer;
 begin
   result := Self;
-  FPostalCode := EmptyStr;
+  FZipCode := EmptyStr;
   for I := 1 to AValue.Length do
   begin
     if CharInSet(AValue[I], ['0'..'9']) then
-      FPostalCode := FPostalCode + AValue[I];
+      FZipCode := FZipCode + AValue[I];
   end;
 end;
 

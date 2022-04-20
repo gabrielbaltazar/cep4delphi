@@ -15,12 +15,12 @@ type TCep4DServiceViaCep = class(TInterfacedObject, ICep4DService)
 
   private
     FAddress: ICep4DModelAddress;
-    FPostalCode: String;
+    FZipCode: String;
     FComponent: ICep4DComponentRequest;
     FDecorator: ICep4DService;
 
   protected
-    function PostalCode(AValue: String): ICep4DService;
+    function ZipCode(AValue: String): ICep4DService;
     function Search: ICep4DModelAddress;
 
     function Address: ICep4DModelAddress;
@@ -60,11 +60,11 @@ begin
   result := Self.Create;
 end;
 
-function TCep4DServiceViaCep.PostalCode(AValue: String): ICep4DService;
+function TCep4DServiceViaCep.ZipCode(AValue: String): ICep4DService;
 begin
   result := Self;
-  FPostalCode := AValue;
-  FDecorator.PostalCode(AValue);
+  FZipCode := AValue;
+  FDecorator.ZipCode(AValue);
 end;
 
 function TCep4DServiceViaCep.Search: ICep4DModelAddress;
@@ -75,8 +75,8 @@ var
 begin
   try
     FAddress := NewAddress;
-    FAddress.PostalCode(FPostalCode);
-    LUrl := Format('https://viacep.com.br/ws/%s/json', [FAddress.PostalCode]);
+    FAddress.ZipCode(FZipCode);
+    LUrl := Format('https://viacep.com.br/ws/%s/json', [FAddress.ZipCode]);
 
     FComponent
       .BaseUrl(LUrl)
