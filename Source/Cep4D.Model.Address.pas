@@ -10,8 +10,8 @@ type TCep4DModelAddress = class(TInterfacedObject, ICep4DModelAddress)
 
   private
     FPostalCode: String;
-    FStreet: String;
-    FStreetType: string;
+    FAddress: String;
+    FAddressType: string;
     FComplement: string;
     FDistrict: String;
     FCity: string;
@@ -25,11 +25,11 @@ type TCep4DModelAddress = class(TInterfacedObject, ICep4DModelAddress)
     function PostalCode: String; overload;
     function PostalCode(AValue: String): ICep4DModelAddress; overload;
 
-    function Street: String; overload;
-    function Street(AValue: String): ICep4DModelAddress; overload;
+    function Address: String; overload;
+    function Address(AValue: String): ICep4DModelAddress; overload;
 
-    function StreetType: String; overload;
-    function StreetType(AValue: String): ICep4DModelAddress; overload;
+    function AddressType: String; overload;
+    function AddressType(AValue: String): ICep4DModelAddress; overload;
 
     function Complement: String; overload;
     function Complement(AValue: String): ICep4DModelAddress; overload;
@@ -174,26 +174,26 @@ begin
   result := FState;
 end;
 
-function TCep4DModelAddress.Street(AValue: String): ICep4DModelAddress;
+function TCep4DModelAddress.Address(AValue: String): ICep4DModelAddress;
 begin
   result := Self;
-  FStreet := AValue;
+  FAddress := AValue;
 end;
 
-function TCep4DModelAddress.Street: String;
+function TCep4DModelAddress.Address: String;
 begin
-  result := FStreet;
+  result := FAddress;
 end;
 
-function TCep4DModelAddress.StreetType: String;
+function TCep4DModelAddress.AddressType: String;
 begin
-  result := FStreetType;
+  result := FAddressType;
 end;
 
-function TCep4DModelAddress.StreetType(AValue: String): ICep4DModelAddress;
+function TCep4DModelAddress.AddressType(AValue: String): ICep4DModelAddress;
 begin
   result := Self;
-  FStreetType := AValue;
+  FAddressType := AValue;
 end;
 
 end.

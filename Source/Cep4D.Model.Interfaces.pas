@@ -8,11 +8,11 @@ type
     function PostalCode: String; overload;
     function PostalCode(AValue: String): ICep4DModelAddress; overload;
 
-    function Street: String; overload;
-    function Street(AValue: String): ICep4DModelAddress; overload;
+    function Address: String; overload;
+    function Address(AValue: String): ICep4DModelAddress; overload;
 
-    function StreetType: String; overload;
-    function StreetType(AValue: String): ICep4DModelAddress; overload;
+    function AddressType: String; overload;
+    function AddressType(AValue: String): ICep4DModelAddress; overload;
 
     function Complement: String; overload;
     function Complement(AValue: String): ICep4DModelAddress; overload;

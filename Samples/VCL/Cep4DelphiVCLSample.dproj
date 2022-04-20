@@ -107,6 +107,15 @@
         </DCCReference>
         <DCCReference Include="..\..\Source\Cep4D.Model.Interfaces.pas"/>
         <DCCReference Include="..\..\Source\Cep4D.Model.Address.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Service.Interfaces.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Component.Interfaces.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Component.RestClient.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Exceptions.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Service.Awesomeapi.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Service.ViaCep.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Service.ApiCep.pas"/>
+        <DCCReference Include="..\..\Source\Cep4D.Helper.JSON.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
