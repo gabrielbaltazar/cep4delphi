@@ -1,0 +1,199 @@
+unit Cep4D.Model.Address;
+
+interface
+
+uses
+  Cep4D.Model.Interfaces,
+  System.SysUtils;
+
+type TCep4DModelAddress = class(TInterfacedObject, ICep4DModelAddress)
+
+  private
+    FPostalCode: String;
+    FStreet: String;
+    FStreetType: string;
+    FComplement: string;
+    FDistrict: String;
+    FCity: string;
+    FIbgeCode: Integer;
+    FState: string;
+    FDDD: Integer;
+    FLatitude: Double;
+    FLongitude: Double;
+
+  protected
+    function PostalCode: String; overload;
+    function PostalCode(AValue: String): ICep4DModelAddress; overload;
+
+    function Street: String; overload;
+    function Street(AValue: String): ICep4DModelAddress; overload;
+
+    function StreetType: String; overload;
+    function StreetType(AValue: String): ICep4DModelAddress; overload;
+
+    function Complement: String; overload;
+    function Complement(AValue: String): ICep4DModelAddress; overload;
+
+    function District: String; overload;
+    function District(AValue: String): ICep4DModelAddress; overload;
+
+    function City: String; overload;
+    function City(AValue: String): ICep4DModelAddress; overload;
+
+    function IbgeCode: Integer; overload;
+    function IbgeCode(AValue: Integer): ICep4DModelAddress; overload;
+
+    function State: String; overload;
+    function State(AValue: String): ICep4DModelAddress; overload;
+
+    function DDD: Integer; overload;
+    function DDD(AValue: Integer): ICep4DModelAddress; overload;
+
+    function Latitude: Double; overload;
+    function Latitude(AValue: Double): ICep4DModelAddress; overload;
+
+    function Longitude: Double; overload;
+    function Longitude(AValue: Double): ICep4DModelAddress; overload;
+
+  public
+    class function New: ICep4DModelAddress;
+end;
+
+implementation
+
+{ TCep4DModelAddress }
+
+function TCep4DModelAddress.City: String;
+begin
+  result := FCity;
+end;
+
+function TCep4DModelAddress.City(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FCity := AValue;
+end;
+
+function TCep4DModelAddress.Complement: String;
+begin
+  result := FComplement;
+end;
+
+function TCep4DModelAddress.Complement(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FComplement := AValue;
+end;
+
+function TCep4DModelAddress.DDD(AValue: Integer): ICep4DModelAddress;
+begin
+  Result := Self;
+  FDDD := AValue;
+end;
+
+function TCep4DModelAddress.DDD: Integer;
+begin
+  result := FDDD;
+end;
+
+function TCep4DModelAddress.District(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FDistrict := AValue;
+end;
+
+function TCep4DModelAddress.District: String;
+begin
+  result := FDistrict;
+end;
+
+function TCep4DModelAddress.IbgeCode(AValue: Integer): ICep4DModelAddress;
+begin
+  result := Self;
+  FIbgeCode := AValue;
+end;
+
+function TCep4DModelAddress.IbgeCode: Integer;
+begin
+  result := FIbgeCode;
+end;
+
+function TCep4DModelAddress.Latitude: Double;
+begin
+  result := FLatitude;
+end;
+
+function TCep4DModelAddress.Latitude(AValue: Double): ICep4DModelAddress;
+begin
+  result := Self;
+  FLatitude := AValue;
+end;
+
+function TCep4DModelAddress.Longitude: Double;
+begin
+  result := FLongitude;
+end;
+
+function TCep4DModelAddress.Longitude(AValue: Double): ICep4DModelAddress;
+begin
+  result := Self;
+  FLongitude := AValue;
+end;
+
+class function TCep4DModelAddress.New: ICep4DModelAddress;
+begin
+  result := Self.Create;
+end;
+
+function TCep4DModelAddress.PostalCode: String;
+begin
+  result := FPostalCode;
+end;
+
+function TCep4DModelAddress.PostalCode(AValue: String): ICep4DModelAddress;
+var
+  I: Integer;
+begin
+  result := Self;
+  FPostalCode := EmptyStr;
+  for I := 1 to AValue.Length do
+  begin
+    if CharInSet(AValue[I], ['0'..'9']) then
+      FPostalCode := FPostalCode + AValue[I];
+  end;
+end;
+
+function TCep4DModelAddress.State(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FState := AValue;
+end;
+
+function TCep4DModelAddress.State: String;
+begin
+  result := FState;
+end;
+
+function TCep4DModelAddress.Street(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FStreet := AValue;
+end;
+
+function TCep4DModelAddress.Street: String;
+begin
+  result := FStreet;
+end;
+
+function TCep4DModelAddress.StreetType: String;
+begin
+  result := FStreetType;
+end;
+
+function TCep4DModelAddress.StreetType(AValue: String): ICep4DModelAddress;
+begin
+  result := Self;
+  FStreetType := AValue;
+end;
+
+end.
