@@ -10,7 +10,7 @@ type
 
   ICep4DComponentRequest = interface
     ['{05FF57D1-2FCF-4859-93BF-64A6469925C0}']
-    function BaseUrl(AValue: String): ICep4DComponentRequest;
+    function BaseUrl(AValue: string): ICep4DComponentRequest;
     function Send: ICep4DComponentResponse;
 
     function Response: ICep4DComponentResponse;
@@ -32,7 +32,7 @@ uses
 
 function GetComponent: ICep4DComponentRequest;
 begin
-  result := TCep4DComponentRestClient.New;
+  Result := TCep4DComponentRestClient.New;
 end;
 
 end.

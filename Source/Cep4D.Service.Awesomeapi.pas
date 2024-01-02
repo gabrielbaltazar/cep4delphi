@@ -11,26 +11,23 @@ uses
   Cep4D.Component.Interfaces,
   Cep4D.Helper.JSON;
 
-type TCep4DServiceAwesomeapi = class(TInterfacedObject, ICep4DService)
-
+type
+  TCep4DServiceAwesomeapi = class(TInterfacedObject, ICep4DService)
   private
     FAddress: ICep4DModelAddress;
-    FZipCode: String;
+    FZipCode: string;
     FComponent: ICep4DComponentRequest;
     FDecorator: ICep4DService;
-
   protected
-    function ZipCode(AValue: String): ICep4DService;
+    function ZipCode(AValue: string): ICep4DService;
     function Search: ICep4DModelAddress;
 
     function Address: ICep4DModelAddress;
     function Component(AValue: ICep4DComponentRequest): ICep4DService;
-
   public
-    constructor create;
+    constructor Create;
     class function New: ICep4DService;
-
-end;
+  end;
 
 implementation
 
@@ -40,29 +37,29 @@ function TCep4DServiceAwesomeapi.Address: ICep4DModelAddress;
 begin
   if not Assigned(FAddress) then
     FAddress := NewAddress;
-  result := FAddress;
+  Result := FAddress;
 end;
 
 function TCep4DServiceAwesomeapi.Component(AValue: ICep4DComponentRequest): ICep4DService;
 begin
-  result := Self;
+  Result := Self;
   FComponent := AValue;
   FDecorator.Component(AValue);
 end;
 
-constructor TCep4DServiceAwesomeapi.create;
+constructor TCep4DServiceAwesomeapi.Create;
 begin
   FDecorator := TCep4DServiceViaCep.New;
 end;
 
 class function TCep4DServiceAwesomeapi.New: ICep4DService;
 begin
-  result := Self.create;
+  Result := Self.Create;
 end;
 
-function TCep4DServiceAwesomeapi.ZipCode(AValue: String): ICep4DService;
+function TCep4DServiceAwesomeapi.ZipCode(AValue: string): ICep4DService;
 begin
-  result := Self;
+  Result := Self;
   FZipCode := AValue;
   FDecorator.ZipCode(AValue);
 end;
@@ -78,9 +75,7 @@ begin
     FAddress.ZipCode(FZipCode);
     LUrl := Format('https://cep.awesomeapi.com.br/json/%s', [FAddress.ZipCode]);
 
-    FComponent
-      .BaseUrl(LUrl)
-      .Send;
+    FComponent.BaseUrl(LUrl).Send;
 
     LJSON := FComponent.Response.GetJSONObject;
     if Assigned(LJSON) then
@@ -90,12 +85,12 @@ begin
         raise Exception.Create(LJSON.ValueAsString('message'));
 
       FAddress
-        .Address(LJSON.valueAsString('address'))
-        .AddressType(LJSON.valueAsString('address_type'))
-        .District(LJSON.valueAsString('district'))
+        .Address(LJSON.ValueAsString('address'))
+        .AddressType(LJSON.ValueAsString('address_type'))
+        .District(LJSON.ValueAsString('district'))
         .IbgeCode(LJSON.ValueAsInteger('city_ibge'))
-        .City(LJSON.valueAsString('city'))
-        .State(LJSON.valueAsString('state'))
+        .City(LJSON.ValueAsString('city'))
+        .State(LJSON.ValueAsString('state'))
         .Latitude(LJSON.ValueAsFloat('lat'))
         .Longitude(LJSON.ValueAsFloat('lng'))
         .DDD(LJSON.ValueAsInteger('ddd'));
@@ -103,7 +98,6 @@ begin
   except
     FAddress := FDecorator.Search;
   end;
-
   Result := FAddress;
 end;
 

@@ -10,33 +10,31 @@ type
   ECep4DException = class(Exception)
   private
     FStatusCode: Integer;
-    FStatusText: String;
+    FStatusText: string;
     FContent: string;
     FJSONValue: TJSONValue;
-
   public
+    constructor Create(AStatusCode: Integer; AStatusText, AContent: string; AJSON: TJSONValue);
+    destructor Destroy; override;
+
     property StatusCode: Integer read FStatusCode;
-    property StatusText: String read FStatusText;
+    property StatusText: string read FStatusText;
     property Content: string read FContent;
     property JSONValue: TJSONValue read FJSONValue;
-
-    constructor create(AStatusCode: Integer; AStatusText, AContent: String; AJSON: TJSONValue);
-    destructor Destroy; override;
   end;
 
 implementation
 
 { ECep4DException }
 
-constructor ECep4DException.create(AStatusCode: Integer; AStatusText, AContent: String; AJSON: TJSONValue);
+constructor ECep4DException.Create(AStatusCode: Integer; AStatusText, AContent: string; AJSON: TJSONValue);
 begin
   FStatusCode := AStatusCode;
   FStatusText := AStatusText;
   FContent := AContent;
 
   Self.Message := Format('%s %s: %s', [FStatusCode.ToString,
-                                       FStatusText,
-                                       FContent]);
+    FStatusText, FContent]);
 
   if Assigned(AJSON) then
     FJSONValue := AJSON.Clone as TJSONValue;

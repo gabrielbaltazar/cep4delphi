@@ -6,15 +6,15 @@ uses
   System.SysUtils,
   System.JSON;
 
-type TCep4DHelperJSONObject = class helper for TJSONObject
-
+type
+  TCep4DHelperJSONObject = class helper for TJSONObject
   public
     function ValueAsBoolean(AName: string; ADefault: Boolean = false): Boolean;
     function ValueAsString(AName: string; ADefault: string = ''): string;
     function ValueAsInteger(AName: string; ADefault: Integer = 0): Integer;
     function ValueAsFloat(AName: string; ADefault: Double = 0): Double;
-    function ValueAsJSONObject(AName: String): TJSONObject;
-end;
+    function ValueAsJSONObject(AName: string): TJSONObject;
+  end;
 
 implementation
 
@@ -24,11 +24,11 @@ function TCep4DHelperJSONObject.ValueAsBoolean(AName: string; ADefault: Boolean)
 var
   LStrValue: string;
 begin
-  result := ADefault;
+  Result := ADefault;
   if GetValue(AName) <> nil then
   begin
     LStrValue := GetValue(AName).ToString;
-    result := not LStrValue.Equals('false');
+    Result := not LStrValue.Equals('false');
   end;
 end;
 
@@ -37,11 +37,9 @@ var
   LStrValue: string;
 begin
   LStrValue := ValueAsString(AName, ADefault.ToString);
-  LStrValue := LStrValue
-                .Replace('.', FormatSettings.DecimalSeparator)
-                .Replace(',', FormatSettings.DecimalSeparator);
-
-  result := StrToFloatDef(LStrValue, ADefault);
+  LStrValue := LStrValue.Replace('.', FormatSettings.DecimalSeparator)
+    .Replace(',', FormatSettings.DecimalSeparator);
+  Result := StrToFloatDef(LStrValue, ADefault);
 end;
 
 function TCep4DHelperJSONObject.ValueAsInteger(AName: string; ADefault: Integer): Integer;
@@ -49,21 +47,21 @@ var
   LStrValue: string;
 begin
   LStrValue := ValueAsString(AName, ADefault.ToString);
-  result := StrToIntDef(LStrValue, ADefault);
+  Result := StrToIntDef(LStrValue, ADefault);
 end;
 
-function TCep4DHelperJSONObject.ValueAsJSONObject(AName: String): TJSONObject;
+function TCep4DHelperJSONObject.ValueAsJSONObject(AName: string): TJSONObject;
 begin
-  result := nil;
+  Result := nil;
   if GetValue(AName) is TJSONObject then
-    result := TJSONObject( GetValue(AName) );
+    Result := TJSONObject( GetValue(AName) );
 end;
 
 function TCep4DHelperJSONObject.ValueAsString(AName, ADefault: string): string;
 begin
-  result := ADefault;
+  Result := ADefault;
   if GetValue(AName) <> nil then
-    result := GetValue(AName).Value;
+    Result := GetValue(AName).Value;
 end;
 
 end.

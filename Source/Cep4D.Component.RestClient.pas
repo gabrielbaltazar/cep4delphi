@@ -15,38 +15,36 @@ uses
   System.JSON,
   System.TypInfo;
 
-type TCep4DComponentRestClient = class(TInterfacedObject, ICep4DComponentRequest,
-                                                          ICep4DComponentResponse)
+type
+  TCep4DComponentRestClient = class(TInterfacedObject, ICep4DComponentRequest,
+    ICep4DComponentResponse)
   private
-    FBaseUrl: String;
+    FBaseUrl: string;
     FClient: TRESTClient;
     FRequest: TRESTRequest;
     FResponse: TRESTResponse;
 
     procedure CreateComponents;
-
   protected
-    function BaseUrl(AValue: String): ICep4DComponentRequest;
+    function BaseUrl(AValue: string): ICep4DComponentRequest;
     function Send: ICep4DComponentResponse;
 
     function Response: ICep4DComponentResponse;
     function StatusCode: Integer;
     function StatusText: string;
     function GetJSONObject: TJSONObject;
-
   public
     class function New: ICep4DComponentRequest;
     destructor Destroy; override;
-
-end;
+  end;
 
 implementation
 
 { TCep4DComponentRestClient }
 
-function TCep4DComponentRestClient.BaseUrl(AValue: String): ICep4DComponentRequest;
+function TCep4DComponentRestClient.BaseUrl(AValue: string): ICep4DComponentRequest;
 begin
-  result := Self;
+  Result := Self;
   FBaseUrl := AValue;
 end;
 
@@ -78,24 +76,24 @@ end;
 
 function TCep4DComponentRestClient.GetJSONObject: TJSONObject;
 begin
-  result := nil;
+  Result := nil;
   if Assigned(FResponse) then
-    result := TJSONObject(FResponse.JSONValue);
+    Result := TJSONObject(FResponse.JSONValue);
 end;
 
 class function TCep4DComponentRestClient.New: ICep4DComponentRequest;
 begin
-  result := Self.Create;
+  Result := Self.Create;
 end;
 
 function TCep4DComponentRestClient.Response: ICep4DComponentResponse;
 begin
-  result := Self;
+  Result := Self;
 end;
 
 function TCep4DComponentRestClient.Send: ICep4DComponentResponse;
 begin
-  result := Self;
+  Result := Self;
   CreateComponents;
 
   FClient.BaseURL := FBaseUrl;
@@ -108,16 +106,16 @@ end;
 
 function TCep4DComponentRestClient.StatusCode: Integer;
 begin
-  result := 0;
+  Result := 0;
   if Assigned(FResponse) then
-    result := FResponse.StatusCode;
+    Result := FResponse.StatusCode;
 end;
 
 function TCep4DComponentRestClient.StatusText: string;
 begin
-  result := EmptyStr;
+  Result := EmptyStr;
   if Assigned(FResponse) then
-    result := FResponse.StatusText;
+    Result := FResponse.StatusText;
 end;
 
 end.

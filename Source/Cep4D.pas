@@ -18,7 +18,7 @@ implementation
 
 function GetCep4D: ICep4DService;
 begin
-  result := GetService;
+  Result := GetService;
 end;
 
 end.

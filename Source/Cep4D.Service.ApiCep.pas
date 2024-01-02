@@ -10,24 +10,21 @@ uses
   Cep4D.Component.Interfaces,
   Cep4D.Helper.JSON;
 
-type TCep4DServiceApiCep = class(TInterfacedObject, ICep4DService)
-
+type
+  TCep4DServiceApiCep = class(TInterfacedObject, ICep4DService)
   private
     FAddress: ICep4DModelAddress;
-    FZipCode: String;
+    FZipCode: string;
     FComponent: ICep4DComponentRequest;
-
   protected
-    function ZipCode(AValue: String): ICep4DService;
+    function ZipCode(AValue: string): ICep4DService;
     function Search: ICep4DModelAddress;
 
     function Address: ICep4DModelAddress;
     function Component(AValue: ICep4DComponentRequest): ICep4DService;
-
   public
     class function New: ICep4DService;
-
-end;
+  end;
 
 implementation
 
@@ -37,40 +34,38 @@ function TCep4DServiceApiCep.Address: ICep4DModelAddress;
 begin
   if not Assigned(FAddress) then
     FAddress := NewAddress;
-  result := FAddress;
+  Result := FAddress;
 end;
 
 function TCep4DServiceApiCep.Component(AValue: ICep4DComponentRequest): ICep4DService;
 begin
-  result := Self;
+  Result := Self;
   FComponent := AValue;
 end;
 
 class function TCep4DServiceApiCep.New: ICep4DService;
 begin
-  result := Self.Create;
+  Result := Self.Create;
 end;
 
-function TCep4DServiceApiCep.ZipCode(AValue: String): ICep4DService;
+function TCep4DServiceApiCep.ZipCode(AValue: string): ICep4DService;
 begin
-  result := Self;
+  Result := Self;
   FZipCode := AValue;
 end;
 
 function TCep4DServiceApiCep.Search: ICep4DModelAddress;
 var
   LUrl: string;
-  LStatus: Integer;
   LMessage: string;
+  LStatus: Integer;
   LJSON: TJSONObject;
 begin
   FAddress := NewAddress;
   FAddress.ZipCode(FZipCode);
   LUrl := Format('https://ws.apicep.com/cep/%s.json', [FAddress.ZipCode]);
 
-  FComponent
-    .BaseUrl(LUrl)
-    .Send;
+  FComponent.BaseUrl(LUrl).Send;
 
   LJSON := FComponent.Response.GetJSONObject;
   if Assigned(LJSON) then
@@ -82,14 +77,13 @@ begin
       raise Exception.Create(LMessage);
     end;
 
-    FAddress
-      .Address(LJSON.valueAsString('address'))
-      .District(LJSON.valueAsString('district'))
-      .City(LJSON.valueAsString('city'))
-      .State(LJSON.valueAsString('state'));
+    FAddress.Address(LJSON.ValueAsString('address'))
+      .District(LJSON.ValueAsString('district'))
+      .City(LJSON.ValueAsString('city'))
+      .State(LJSON.ValueAsString('state'));
   end;
 
-  result := FAddress;
+  Result := FAddress;
 end;
 
 end.
